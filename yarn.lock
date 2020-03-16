@@ -617,7 +617,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.8.4":
   version "7.8.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.7.tgz#8fefce9802db54881ba59f90bb28719b4996324d"
   integrity sha512-+AATMUFppJDw6aiR5NVPHqIQBlV/Pj8wY/EZH+lmvRdUo9xBaz/rF3alAwFJQavvKfeOlPE7oaaDHVbcySbCsg==
@@ -5629,19 +5629,6 @@ react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-i
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
   integrity sha512-GFMtL0vHkiBv9HluwNZTggSn/sCyEt9n02aM0dSAjGGyqyNlAyftYm4phPxdvCigG15JreC5biwxCgTAJZ7yAA==
-
-react-native-app-auth@^5.0.2:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-app-auth/-/react-native-app-auth-5.1.1.tgz#5b44f6d34b259d375bc90fc78c6c7b2d71e63dfb"
-  integrity sha512-5y2aIVk7lP+WwoEGDJhGTrsZH2fEy4VitkD3RDrzmyOi32Hx9UBHUaEKqAWCVfKUEP1hHBgMuLkmhgoY2ty75A==
-  dependencies:
-    invariant "2.2.4"
-    react-native-base64 "0.0.2"
-
-react-native-base64@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-base64/-/react-native-base64-0.0.2.tgz#c28463c2c6779ac3ec5fdd12979ebc8c5f9b410a"
-  integrity sha512-Fu/J1a2y0X22EJDWqJR2oEa1fpP4gTFjYxk8ElJdt1Yak3HOXmFJ7EohLVHU2DaQkgmKfw8qb7u/48gpzveRbg==
 
 react-native-circular-timer@^1.1.4:
   version "1.1.4"

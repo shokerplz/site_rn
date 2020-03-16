@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, StatusBar, View, Text, AsyncStorage, Image } from 'react-native';
+import { StyleSheet, Dimensions, StatusBar, View, Text, AsyncStorage, Image, Platform } from 'react-native';
 import GetData from './Main_auc';
 import LoginScreen from './LoginScreen';
 import Auction from './AuctionScreen';
@@ -35,10 +35,21 @@ class App extends React.Component {
     if (this.state.fontLoaded) {
       return (
         <View style={{flex: 1}} >
-          <SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight}}>
+          <SafeAreaView style={{flex: 1, paddingTop: 0}}>
           <Header style={{height: 50, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
             {dev_modules}
-            <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} /><Text style={{textAlignVertical: 'center', paddingTop: 12, fontFamily: 'Montserrat-Regular', fontSize: 25}}>Corcu</Text>
+            <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
+            <Text 
+            style={
+              {
+                textAlignVertical: 'center', 
+                paddingTop: 12, 
+                fontFamily: 'Montserrat-Bold', 
+                fontSize: 25
+                }
+              }>
+                Corcu
+              </Text>
           </Header>
           <NavigationContainer>
         <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>

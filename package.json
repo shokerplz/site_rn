@@ -19,7 +19,6 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "~0.61.4",
-    "react-native-app-auth": "^5.0.2",
     "react-native-circular-timer": "^1.1.4",
     "react-native-countdown-component": "^2.6.0",
     "react-native-fast-image": "^7.0.2",
@@ -42,8 +41,8 @@
     "react-navigation": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.4.5",
     "@babel/core": "^7.0.0",
+    "@babel/runtime": "^7.4.5",
     "babel-jest": "~24.9.0",
     "jest": "~24.9.0",
     "metro-react-native-babel-preset": "~0.56.0",

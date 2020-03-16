@@ -109,8 +109,7 @@ class MyAccountChangePassword extends React.Component {
                     </Item>
                     <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} onPress={() => {
                         if (this.state.new_password == this.state.new_confirmation) { 
-                            // make checkout with old meta
-                            // make post request to update meta
+                            MyAccountButton('password-change', null, null, null, password = this.state.new_password)
                         } else {
                             alert('Новый пароль и подтверждение не совпадают')
                         }
