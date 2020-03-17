@@ -143,6 +143,7 @@ class GetData extends React.Component {
 
   goToAuction(auc_id) { this.props.navigation.navigate('Auction', { id: auc_id }) }
     render() {
+      postRequest('/wp/v2/users/me').then(console.log)
       //retrieveData('token').then(console.log);
       if (this.state.loading == true) {
         return( 
@@ -167,7 +168,7 @@ class GetData extends React.Component {
     }
     */
 
-   <View style={{flex: 1}}>
+   <View>
     <FlatList
     data={this.state.data}
     numColumns={2}

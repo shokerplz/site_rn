@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Container, Content, Form, Item, Input, Label, Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
@@ -30,11 +30,13 @@ async function MyAccountButton(form, username = null, first_name = null, last_na
     switch(form) {
         case 'info':
             data = await postRequest('/wp/v2/users/'+data['id'], formBody);
+        case 'password-check':
+
         case 'password-change':
             postRequest('/simple-jwt-authentication/v1/token/validate').then(
                 (response) => {
                     if (response.data.status == 200) {
-                        postRequest('/wp/v2/users'+data['id'], formBody).then(console.log)
+                        postRequest('/wp/v2/users/'+data['id'], formBody).then(console.log)
                     }
                 }
             )
@@ -108,8 +110,9 @@ class MyAccountChangePassword extends React.Component {
                         <Input secureTextEntry={true} placeholder="Подтверждение" value={this.state.new_confirmation} onChangeText={(text) => this.setState({new_confirmation: text})} />
                     </Item>
                     <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} onPress={() => {
-                        if (this.state.new_password == this.state.new_confirmation) { 
-                            MyAccountButton('password-change', null, null, null, password = this.state.new_password)
+                        if (this.state.new_password == this.state.new_confirmation) {
+                            MyAccountButton('password-check', data['username'], null, null, this.state.current_password)
+                            //MyAccountButton('password-change', null, null, null, password = this.state.new_password)
                         } else {
                             alert('Новый пароль и подтверждение не совпадают')
                         }
@@ -202,7 +205,7 @@ class MyAccount extends React.Component {
     }
 
     async componentDidMount() {
-        data = await postRequest('/wp/v2/users/me');
+        data = await retrieveData('acc_details');
         this.setState({ loading: false })
     }
 

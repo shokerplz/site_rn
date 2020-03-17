@@ -43,7 +43,6 @@ class App extends React.Component {
             style={
               {
                 textAlignVertical: 'center', 
-                paddingTop: 12, 
                 fontFamily: 'Montserrat-Bold', 
                 fontSize: 25
                 }
