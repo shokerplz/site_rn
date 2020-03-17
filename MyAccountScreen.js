@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Container, Content, Form, Item, Input, Label, Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
-import { retrieveData, postRequest } from './functions';
+import { retrieveData, postRequest, getRequest, storeData } from './functions';
 import LottieView from "lottie-react-native";
+import CookieManager from '@react-native-community/cookies';
 import { ThemeColors } from 'react-navigation';
 
+const axios = require('axios');
 var data = null;
 
 async function MyAccountButton(form, username = null, first_name = null, last_name = null, password =null) {
@@ -30,16 +32,27 @@ async function MyAccountButton(form, username = null, first_name = null, last_na
     switch(form) {
         case 'info':
             data = await postRequest('/wp/v2/users/'+data['id'], formBody);
+            console.log(data)
+            break;
         case 'password-check':
-
+            let response = await postRequest('/simple-jwt-authentication/v1/token', formBody)
+            if (response.token != undefined) {
+                storeData('token', response.token)
+                return(true);
+            } else {
+                return(response.code)
+            }
+            break;
         case 'password-change':
             postRequest('/simple-jwt-authentication/v1/token/validate').then(
                 (response) => {
                     if (response.data.status == 200) {
                         postRequest('/wp/v2/users/'+data['id'], formBody).then(console.log)
+                        CookieManager.clearAll();
                     }
                 }
             )
+            break;
     }
 }
 
@@ -95,6 +108,18 @@ class MyAccountChangePassword extends React.Component {
         new_password: '',
         new_confirmation: ''
     }
+    async check_password() {
+        if (this.state.new_password == this.state.new_confirmation) {
+            let password_check = await MyAccountButton('password-check', data['username'], null, null, this.state.current_password);
+            if (password_check == true) {
+                alert('Ready to change passwd!')
+            } else {
+                alert(password_check)
+            }
+        } else {
+            alert('Новый пароль и подтверждение не совпадают')
+        } }
+
     render() {
         return(
             <Container>
@@ -109,14 +134,7 @@ class MyAccountChangePassword extends React.Component {
                     <Item>
                         <Input secureTextEntry={true} placeholder="Подтверждение" value={this.state.new_confirmation} onChangeText={(text) => this.setState({new_confirmation: text})} />
                     </Item>
-                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} onPress={() => {
-                        if (this.state.new_password == this.state.new_confirmation) {
-                            MyAccountButton('password-check', data['username'], null, null, this.state.current_password)
-                            //MyAccountButton('password-change', null, null, null, password = this.state.new_password)
-                        } else {
-                            alert('Новый пароль и подтверждение не совпадают')
-                        }
-                    }} >
+                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} onPress={() => this.check_password()}>
                 <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>__FILL_THIS__</Text>
                 </AwesomeButton>
                 </Form>
@@ -205,7 +223,7 @@ class MyAccount extends React.Component {
     }
 
     async componentDidMount() {
-        data = await retrieveData('acc_details');
+        data = await postRequest('/wp/v2/users/me');
         this.setState({ loading: false })
     }
 

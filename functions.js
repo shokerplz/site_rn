@@ -3,6 +3,7 @@ import { Alert, AsyncStorage, Dimensions, View } from 'react-native';
 import { Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
 
+
 class FooterButtons extends React.Component {
   constructor(props) {
     super(props)
@@ -61,11 +62,31 @@ export async function retrieveData(key) {
     }
   };
 
+ export async function storeData(key, item) {
+    try {
+    await AsyncStorage.setItem(key, item);
+    } catch (error) {
+    // Error saving data
+    }
+};
+
 export async function postRequest(route, data = null) {
-  response = await fetch('https://corcu.ru/wp-json'+route, {
+  response = await fetch('https://www.corcu.ru/wp-json'+route, {
     method: 'POST',
-    headers: { 
-      'Content-Type': 'application/x-www-form-urlencoded',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 
+      'Authorization': 'Bearer '+ await retrieveData('token'),
+    },
+    body: data
+});
+  return(JSON.parse(await response.text()));
+}
+
+export async function getRequest(route, data = null) {
+  response = await fetch('https://www.corcu.ru/wp-json'+route, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 
       'Authorization': 'Bearer '+ await retrieveData('token'),
     },
     body: data
@@ -76,7 +97,7 @@ export async function postRequest(route, data = null) {
 // BID BUTTON CALLS THIS FUNCTION
 export async function btnClick(pid, auction_time) {
     let token = await retrieveData('token')
-    let response = await fetch('https://corcu.ru/wp-json/corcu/bet/'+pid, {
+    let response = await fetch('https://www.corcu.ru/wp-json/corcu/bet/'+pid, {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer '+ token,

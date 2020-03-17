@@ -117,6 +117,7 @@ class GetData extends React.Component {
           (response) => {
             if (response.data.status != 200) {
               AsyncStorage.removeItem('token');
+              console.log('token removed')
             }
           }
         )
@@ -143,7 +144,7 @@ class GetData extends React.Component {
 
   goToAuction(auc_id) { this.props.navigation.navigate('Auction', { id: auc_id }) }
     render() {
-      postRequest('/wp/v2/users/me').then(console.log)
+      
       //retrieveData('token').then(console.log);
       if (this.state.loading == true) {
         return( 

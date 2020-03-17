@@ -16,26 +16,6 @@ class LoginScreen extends React.Component{
             
     }
 
-    async storeData(key, item) {
-            try {
-            await AsyncStorage.setItem(key, item);
-            } catch (error) {
-            // Error saving data
-            }
-        };
-
-    async retrieveData(key) {
-            try {
-                let value = await AsyncStorage.getItem(key);
-                if (value !== null) {
-                return(value);
-                // We have data!!
-                }
-            } catch (error) {
-                // Error retrieving data
-            }
-        };
-
     
 
     async login_acc() {
