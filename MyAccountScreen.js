@@ -11,7 +11,20 @@ import { ThemeColors } from 'react-navigation';
 const axios = require('axios');
 var data = null;
 
-async function MyAccountButton(form, username = null, first_name = null, last_name = null, password =null) {
+async function MyAccountButton(
+    form, 
+    username = null, 
+    first_name = null, 
+    last_name = null, 
+    password = null,
+    user_fio = null,
+    user_post_index = null,
+    user_town = null,
+    user_real_address = null,
+    user_phone = null,
+    force = null,
+    reassign = null
+    ) {
 
 
     var details = {
@@ -21,12 +34,21 @@ async function MyAccountButton(form, username = null, first_name = null, last_na
     first_name != null ? details.first_name = first_name : null;
     last_name != null ? details.last_name = last_name : null;
     password != null ? details.password = password : null;
+    user_fio != null ? details.user_fio = user_fio : null;
+    user_post_index != null ? details.user_post_index = user_post_index : null;
+    user_town != null ? details.user_town = user_town : null;
+    user_real_address != null ? details.user_real_address = user_real_address : null;
+    user_phone != null ? details.user_phone = user_phone : null;
+    force != null ? details.force = force : null;
+    reassign != null ? details.reassign = reassign : null;
     var formBody = [];
     for (var property in details) {
       var encodedKey = encodeURIComponent(property);
       var encodedValue = encodeURIComponent(details[property]);
       formBody.push(encodedKey + "=" + encodedValue);
     }
+    //test13
+    //GjWv00GLtYOInznFAY!Ir&v&
     formBody = formBody.join("&");
 
     switch(form) {
@@ -52,6 +74,17 @@ async function MyAccountButton(form, username = null, first_name = null, last_na
                     }
                 }
             )
+            break;
+        case 'delete-user':
+            response = await fetch('https://www.corcu.ru/wp-json'+'/wp/v2/users/'+data['id'], {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 
+                  'Authorization': 'Bearer '+ await retrieveData('token'),
+                },
+                body: data
+            });
+            console.log(data)
             break;
     }
 }
@@ -146,11 +179,11 @@ class MyAccountChangePassword extends React.Component {
 
 class MyAccountDelivery extends React.Component {
     state = {
-        fio: '',
-        post_index: '',
-        town: '',
-        adress: '',
-        phone: ''
+        user_fio: this.props.user_fio,
+        user_post_index: this.props.user_post_index,
+        user_town: this.props.user_town,
+        user_real_address: this.props.user_real_address,
+        user_phone: this.props.user_phone
     }
     render() {
         return(
@@ -158,22 +191,35 @@ class MyAccountDelivery extends React.Component {
             <Content>
                 <Form>
                     <Item>
-                        <Input placeholder="Получатель ФИО" value={this.state.fio}/>
+                        <Input placeholder="Получатель ФИО" value={this.state.user_fio} onChangeText={(text) => {this.setState({user_fio: text})}}/>
                     </Item>
                     <Item>
-                        <Input placeholder="Индекс" value={this.state.post_index}/>
+                        <Input placeholder="Индекс" value={this.state.user_post_index} onChangeText={(text) => {this.setState({user_post_index: text})}}/>
                     </Item>
                     <Item>
-                        <Input placeholder="Город" value={this.state.town}/>
+                        <Input placeholder="Город" value={this.state.user_town} onChangeText={(text) => {this.setState({user_town: text})}}/>
                     </Item>
                     <Item>
-                        <Input placeholder="Адрес" value={this.state.adress}/>
+                        <Input placeholder="Адрес" value={this.state.user_real_address} onChangeText={(text) => {this.setState({user_real_address: text})}}/>
                     </Item>
                     <Item>
-                        <Input placeholder="Телефон" value={this.state.phone}/>
+                        <Input placeholder="Телефон" value={this.state.user_phone} onChangeText={(text) => {this.setState({user_phone: text})}}/>
                     </Item>
-                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
-                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>__FILL_THIS__</Text>
+                    <AwesomeButton onPress={() => 
+                        MyAccountButton(
+                            'info', 
+                            null, 
+                            null, 
+                            null, 
+                            null, 
+                            this.state.user_fio, 
+                            this.state.user_post_index, 
+                            this.state.user_town, 
+                            this.state.user_real_address, 
+                            this.state.user_phone
+                            )} 
+                        style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} >
+                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Сохранить</Text>
                 </AwesomeButton>
                 </Form>
             </Content>
@@ -197,8 +243,21 @@ class MyAccountDelete extends React.Component {
                     <Item>
                         <Input placeholder="Пароль" value={this.state.password}/>
                     </Item>
-                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
-                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>__FILL_THIS__</Text>
+                    <AwesomeButton onPress={() => MyAccountButton(
+                                            'delete-user', 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null, 
+                                            null,
+                                            true,
+                                            0
+                    )} style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
+                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Удалить</Text>
                 </AwesomeButton>
                 </Form>
             </Content>
@@ -250,14 +309,27 @@ class MyAccount extends React.Component {
           first_name={data['first_name']} 
           last_name={data['last_name']} 
           email={data['email']} />;
+          break;
         case '1':
           return <MyAccountChangePassword/>;
+          break;
         case '2':
-        return <MyAccountDelivery/>;
+            return <MyAccountDelivery
+            user_fio={data['user_fio'][0]}
+            user_post_index={data['user_post_index'][0]}
+            user_town={data['user_town'][0]}
+            user_real_address={data['user_real_address'][0]}
+            user_phone={data['user_phone'][0]}
+            />;
+            break;
         case '3':
-            return <MyAccountDelete/>;
+            return <MyAccountDelete
+            
+            />;
+            break;
         default:
           return null;
+          break;
         }
       };
     _indexChange = (ind) => { 
