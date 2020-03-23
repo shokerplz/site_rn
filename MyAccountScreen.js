@@ -170,8 +170,8 @@ class MyAccountChangePassword extends React.Component {
                     <Item>
                         <Input secureTextEntry={true} placeholder="Подтверждение" value={this.state.new_confirmation} onChangeText={(text) => this.setState({new_confirmation: text})} />
                     </Item>
-                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} onPress={() => this.check_password()}>
-                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>__FILL_THIS__</Text>
+                    <AwesomeButton style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} style={{margin: 15, alignSelf: 'center'}} onPress={() => this.check_password()}>
+                <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Сменить</Text>
                 </AwesomeButton>
                 </Form>
             </Content>
@@ -221,7 +221,7 @@ class MyAccountDelivery extends React.Component {
                             this.state.user_real_address, 
                             this.state.user_phone
                             )} 
-                        style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} >
+                            style={{margin: 15, alignSelf: 'center'}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'} >
                 <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Сохранить</Text>
                 </AwesomeButton>
                 </Form>
@@ -259,7 +259,7 @@ class MyAccountDelete extends React.Component {
                                             null,
                                             true,
                                             0
-                    )} style={{margin: 10}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
+                    )} style={{margin: 15, alignSelf: 'center'}} height={30} backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
                 <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Удалить</Text>
                 </AwesomeButton>
                 </Form>
