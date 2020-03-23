@@ -11,14 +11,11 @@
 		05660778DCBD4796A2725932 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EED0425AAF4F41F3B4ABE620 /* AntDesign.ttf */; };
 		0960597269EB42639D8BE991 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6ABA54E8824D80A90CA8E6 /* FontAwesome5_Brands.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1675E8F7DA992D4DE9467B2F /* libPods-Corcu-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0D7BA629A1560F3C77FD6D /* libPods-Corcu-tvOS.a */; };
 		1680E2E9138F4445A2091862 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACF2F9A31C3D4FB08AF0D473 /* SimpleLineIcons.ttf */; };
 		27CAE929AAB4A57061B1EEEA /* libPods-CorcuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8623E7C8E53699795F696F8 /* libPods-CorcuTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* CorcuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CorcuTests.m */; };
 		37F1D7074E79491D9474C50A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76A956E1EF6A498AA8D129D7 /* EvilIcons.ttf */; };
@@ -26,6 +23,10 @@
 		57BB6BB781294E878ECF9199 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AC100A47D3D4531B4EF50EE /* Foundation.ttf */; };
 		66B3DBC5486240CFB39ADD19 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5436C8F6B40343D59008292E /* FontAwesome5_Solid.ttf */; };
 		723AB3CAD445422B8FD09CDE /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE7F225948C2488590AFD910 /* Entypo.ttf */; };
+		84072B6F2429215F005FD45C /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84072B6E2429215F005FD45C /* Icon.xcassets */; };
+		84072B742429227C005FD45C /* logo_corcu.svg in Resources */ = {isa = PBXBuildFile; fileRef = 84072B732429227C005FD45C /* logo_corcu.svg */; };
+		84072B762429239C005FD45C /* logo_corcu_2000w.png in Resources */ = {isa = PBXBuildFile; fileRef = 84072B752429239C005FD45C /* logo_corcu_2000w.png */; };
+		84072B7824292459005FD45C /* startScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84072B7724292459005FD45C /* startScreen.storyboard */; };
 		844BBBB3241D9448006E4A8D /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BBBB2241D9448006E4A8D /* Bridge.swift */; };
 		84B44752241E8E5400EC2C86 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D6D48B1801142D4AE7E414A /* Montserrat-Bold.ttf */; };
 		84B44753241E8E7300EC2C86 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3697492F13D14A44AD549FD8 /* Montserrat-Regular.ttf */; };
@@ -69,8 +70,6 @@
 		13B07F961A680F5B00A75B9A /* Corcu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corcu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Corcu/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Corcu/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Corcu/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Corcu/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Corcu/main.m; sourceTree = "<group>"; };
 		2309064292BB9C5D7703A001 /* Pods-Corcu-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corcu-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Corcu-tvOS/Pods-Corcu-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +92,10 @@
 		6EAC3B3999204395A22D6A82 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		76A956E1EF6A498AA8D129D7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		7D4934C1F4D9497BA8F3C8CE /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		84072B6E2429215F005FD45C /* Icon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icon.xcassets; sourceTree = "<group>"; };
+		84072B732429227C005FD45C /* logo_corcu.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = logo_corcu.svg; sourceTree = "<group>"; };
+		84072B752429239C005FD45C /* logo_corcu_2000w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_corcu_2000w.png; sourceTree = "<group>"; };
+		84072B7724292459005FD45C /* startScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = startScreen.storyboard; sourceTree = "<group>"; };
 		844BBBB1241D9447006E4A8D /* Corcu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Corcu-Bridging-Header.h"; sourceTree = "<group>"; };
 		844BBBB2241D9448006E4A8D /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		84912C3E241D530B00B4C0B1 /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,10 +179,9 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				84072B7724292459005FD45C /* startScreen.storyboard */,
 			);
 			name = Corcu;
 			sourceTree = "<group>";
@@ -202,6 +204,8 @@
 		791AD6A2D41B4C23AC0F595E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84072B752429239C005FD45C /* logo_corcu_2000w.png */,
+				84072B732429227C005FD45C /* logo_corcu.svg */,
 				5C44094CFB4842339CA4295E /* Roboto_medium.ttf */,
 				EABEE747485D47EAB7CCAC7B /* Roboto.ttf */,
 				5682EC0A83134C8BB04233EC /* rubicon-icon-font.ttf */,
@@ -241,6 +245,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				84072B6E2429215F005FD45C /* Icon.xcassets */,
 				844BBBB2241D9448006E4A8D /* Bridge.swift */,
 				13B07FAE1A68108700A75B9A /* Corcu */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -427,9 +432,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B44753241E8E7300EC2C86 /* Montserrat-Regular.ttf in Resources */,
+				84072B742429227C005FD45C /* logo_corcu.svg in Resources */,
 				84B44752241E8E5400EC2C86 /* Montserrat-Bold.ttf in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				05660778DCBD4796A2725932 /* AntDesign.ttf in Resources */,
 				723AB3CAD445422B8FD09CDE /* Entypo.ttf in Resources */,
 				37F1D7074E79491D9474C50A /* EvilIcons.ttf in Resources */,
@@ -441,10 +445,13 @@
 				C849ACD69A2F405E9A0B781D /* Fontisto.ttf in Resources */,
 				57BB6BB781294E878ECF9199 /* Foundation.ttf in Resources */,
 				E9E3E1F6907541DDB0D320A8 /* Ionicons.ttf in Resources */,
+				84072B762429239C005FD45C /* logo_corcu_2000w.png in Resources */,
+				84072B6F2429215F005FD45C /* Icon.xcassets in Resources */,
 				D65DE7DE6063480EBB8158EB /* MaterialCommunityIcons.ttf in Resources */,
 				F7A2576F48CD4D69B0851318 /* MaterialIcons.ttf in Resources */,
 				E39DBE96C7EC425CAF438558 /* Octicons.ttf in Resources */,
 				1680E2E9138F4445A2091862 /* SimpleLineIcons.ttf in Resources */,
+				84072B7824292459005FD45C /* startScreen.storyboard in Resources */,
 				50DCD6BC57824CE88F221294 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,7 +460,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,18 +728,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = Corcu;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -837,7 +831,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.corcu.corcu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corcu.corcu;
 				PRODUCT_NAME = Corcu;
 				SWIFT_OBJC_BRIDGING_HEADER = "Corcu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -902,7 +896,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.corcu.corcu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corcu.corcu;
 				PRODUCT_NAME = Corcu;
 				SWIFT_OBJC_BRIDGING_HEADER = "Corcu-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
