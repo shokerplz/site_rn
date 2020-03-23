@@ -76,6 +76,9 @@ async function MyAccountButton(
             )
             break;
         case 'delete-user':
+            alert('Функция удаления аккаунта доступна только с оффициального сайта.')
+            break
+            /*
             response = await fetch('https://www.corcu.ru/wp-json'+'/wp/v2/users/'+data['id'], {
                 method: 'DELETE',
                 headers: {
@@ -85,7 +88,7 @@ async function MyAccountButton(
                 body: data
             });
             console.log(data)
-            break;
+            break;*/
     }
 }
 
