@@ -4,6 +4,7 @@ import GetData from './Main_auc';
 import LoginScreen from './LoginScreen';
 import Auction from './AuctionScreen';
 import MyAccount from './MyAccountScreen'
+import AucsWon from './AuctionWonScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-navigation';
@@ -16,6 +17,7 @@ class App extends React.Component {
       fontLoaded: false,
       DEV: false
     }
+    global.headerHeight = 50;
   }
   async componentDidMount() {
     /*if (process.env.NODE_ENV === 'development') {
@@ -36,7 +38,7 @@ class App extends React.Component {
       return (
         <View style={{flex: 1}} >
           <SafeAreaView style={{flex: 1, paddingTop: 0}}>
-          <Header style={{height: 50, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
+          <Header style={{height: global.headerHeight, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
             {dev_modules}
             <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
             <Text 
@@ -56,6 +58,7 @@ class App extends React.Component {
         <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
         <Stack.Screen name="Auction" component={Auction}></Stack.Screen>
         <Stack.Screen name="My Account" component={MyAccount}></Stack.Screen>
+        <Stack.Screen name="Aucs Won" component={AucsWon}></Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
           </SafeAreaView>

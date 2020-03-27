@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage, Alert } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Container, Content, Form, Item, Input, Label, Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
@@ -10,6 +10,7 @@ import { ThemeColors } from 'react-navigation';
 
 const axios = require('axios');
 var data = null;
+
 
 async function MyAccountButton(
     form, 
@@ -54,7 +55,8 @@ async function MyAccountButton(
     switch(form) {
         case 'info':
             data = await postRequest('/wp/v2/users/'+data['id'], formBody);
-            console.log(data)
+            //console.log(data)
+            Alert.alert('Изменения сохранены', '')
             break;
         case 'password-check':
             let response = await postRequest('/simple-jwt-authentication/v1/token', formBody)
@@ -71,6 +73,7 @@ async function MyAccountButton(
                     if (response.data.status == 200) {
                         postRequest('/wp/v2/users/'+data['id'], formBody).then(console.log)
                         CookieManager.clearAll();
+                        Alert.alert('Пароль изменен', '')
                     }
                 }
             )
@@ -109,6 +112,7 @@ class MyAccountInfo extends React.Component {
             }, 1000);
         }
         return(
+            <>
         <Container>
             <Content>
                 <Form>
@@ -128,12 +132,13 @@ class MyAccountInfo extends React.Component {
                         <Icon name='information-circle' onPress={() => this.setState({display_info: true})} />
                         {display_info}
                     </Item>
-                    <AwesomeButton onPress={() => MyAccountButton('info', null, this.state.first_name, this.state.last_name)} style={{margin: 15, alignSelf: 'center'}} height={30}  backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
+                    <AwesomeButton onPress={() => {MyAccountButton('info', null, this.state.first_name, this.state.last_name)}} style={{margin: 15, alignSelf: 'center'}} height={30}  backgroundColor={'#fafafa'} backgroundDarker={'#fff'}>
                 <Text style={{alignSelf: 'center', marginHorizontal: 20, fontSize: 14, fontFamily: 'Montserrat-Regular', color: '#fe6c17'}}>Сохранить</Text>
                 </AwesomeButton>
                 </Form>
             </Content>
         </Container>
+        </>
             )
     }
 }

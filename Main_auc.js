@@ -170,7 +170,8 @@ class GetData extends React.Component {
     */
 
    <View>
-    <FlatList
+     <View style={{height: Dimensions.get('window').height - 75}}>
+     <FlatList
     data={this.state.data}
     numColumns={2}
     extraData={this.state.data}
@@ -190,7 +191,9 @@ class GetData extends React.Component {
       />
     }
     />
+     </View>
     <FooterButtons 
+    style={{position: 'absolute', bottom: 0}}
     navigate={this.props.navigation} 
     key={retrieveData('token').then((response) => {return(response)})}  />
    </View>

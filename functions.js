@@ -25,7 +25,7 @@ class FooterButtons extends React.Component {
   render() {
     if (typeof(this.state.token) == 'undefined') {
       return(
-        <View style={{ flexDirection: 'row',  justifyContent: 'center', backgroundColor: 'transparent', position: 'relative', top: -45}}>
+        <View style={{ flexDirection: 'row',  justifyContent: 'center', backgroundColor: 'transparent', position: 'relative', top: -40}}>
         <AwesomeButton borderWidth={2} borderColor={'#fe9558'} onPress={this.goToLogin} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='user-o' type='FontAwesome' />
       </AwesomeButton>
@@ -33,7 +33,7 @@ class FooterButtons extends React.Component {
       )
     } else {
       return(
-        <View style={{ flexDirection: 'row',  justifyContent: 'center', backgroundColor: 'transparent', position: 'relative', top: -45}}>
+        <View style={{ flexDirection: 'row',  justifyContent: 'center', backgroundColor: 'transparent', position: 'relative', top: -40}}>
         <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToLogin} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='trophy' type='SimpleLineIcons' />
       </AwesomeButton>
