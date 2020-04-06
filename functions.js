@@ -34,13 +34,13 @@ class FooterButtons extends React.Component {
     } else {
       return(
         <View style={{ flexDirection: 'row',  justifyContent: 'center', backgroundColor: 'transparent', position: 'relative', top: -40}}>
-        <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToLogin} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
+        <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToAucsWon} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='trophy' type='SimpleLineIcons' />
       </AwesomeButton>
       <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToAccount} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='user-o' type='FontAwesome' />
       </AwesomeButton>
-      <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToAucsWon} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
+      <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={() => alert('Not done yet')} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='shoppingcart' type='AntDesign' />
       </AwesomeButton>
         </View>

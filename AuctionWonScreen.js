@@ -46,13 +46,12 @@ class AucsWon extends React.Component {
                     renderItem={({item}) => 
                     <View>
                     <Card style={{height: 120, flexDirection: 'row'}}>
-                    <Image style={{width: 100, resizeMode: 'contain', margin: 10}} source={{uri: item['Auc_img'][0]}}/>
-                    <View style={{flexDirection: 'column'}}>
-                    <Text>{item['Auc_name']}</Text>
-                    <Text>{item['Auc_price']}</Text>
+                    <Image style={{width: 100, resizeMode: 'contain', margin: 10, borderWidth: 1, borderColor: '#D9D9D6'}} source={{uri: item['Auc_img'][0]}}/>
+                    <View style={{flexDirection: 'column', width: 220}}>
+                    <Text style={{fontFamily: 'Montserrat-Regular', padding: 10}}>{item['Auc_name']}</Text>
+                    <Text style={{fontFamily: 'Montserrat-Regular', padding: 10}}>Вы выиграли данный лот при стоимости: {item['Auc_price']} ₽</Text>
                     </View>
                     </Card>
-                    
                     </View>
                     }
                     />
