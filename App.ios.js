@@ -51,6 +51,9 @@ class App extends React.Component {
               }>
                 Corcu
               </Text>
+              <Text style={{position: 'absolute', margin: 5, right: 1, top: 1}}>
+                Колво ставок: 155
+                </Text>
           </Header>
           <NavigationContainer>
         <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>

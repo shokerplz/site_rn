@@ -245,7 +245,7 @@ class MyAccountDelete extends React.Component {
         <Container>
             <Content>
                 <Form>
-                    <Text>Вы уверены в том, что хотите удалить свой аккаунт? 
+                    <Text style={{fontFamily: 'Montserrat-Regular', margin: 15}}>Вы уверены в том, что хотите удалить свой аккаунт? 
                         Это действие удалит все данные аккаунта с сайта. 
                         Для удаления аккаунта, введите Ваш пароль ниже</Text>
                     <Item>
@@ -281,9 +281,9 @@ class MyAccount extends React.Component {
         nav_state: {
             index: 0,
             routes: [
-                { key: '0', title: 'Информация' },
-                { key: '1', title: 'Сменить пароль' },
-                { key: '2', title: 'Адрес доставки'},
+                { key: '0', title: 'Главное' },
+                { key: '1', title: 'Пароль' },
+                { key: '2', title: 'Доставка'},
                 { key: '3', title: 'Удалить аккаунт'}
               ],
         }
@@ -299,7 +299,7 @@ class MyAccount extends React.Component {
             <TabBar
             {...props}
             renderLabel={({ route, focused, color }) => (
-                <Text style={{ color, fontSize: 11 }}>
+                <Text style={{ color, fontSize: 14, fontFamily: 'Montserrat-Bold' }}>
                   {route.title}
                 </Text>
             )}
