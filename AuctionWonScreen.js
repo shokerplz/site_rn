@@ -13,6 +13,7 @@ class AucsWon extends React.Component {
             img: null
         }
     }
+    
 
     async getWon() {
         token = await retrieveData('token');
@@ -36,29 +37,36 @@ class AucsWon extends React.Component {
             this.getWon();
             return(<View><Text>LOADING</Text></View>)
         } else {
-            console.log(this.user_won[0]['Auc_img'][0]);
-            return(
-                <View>
-                    <FlatList
-                    data={this.user_won}
-                    numColumns={1}
-                    keyExtractor={item => item['Auc_ID']}
-                    renderItem={({item}) => 
+            if (this.user_won.length > 0){
+                return(
                     <View>
-                    <Card style={{height: 120, flexDirection: 'row'}}>
-                    <Image style={{width: 100, resizeMode: 'contain', margin: 10}} source={{uri: item['Auc_img'][0]}}/>
-                    <View style={{flexDirection: 'column'}}>
-                    <Text>{item['Auc_name']}</Text>
-                    <Text>{item['Auc_price']}</Text>
+                        <FlatList
+                        data={this.user_won}
+                        numColumns={1}
+                        keyExtractor={item => item['Auc_ID']}
+                        renderItem={({item}) => 
+                        <View>
+                        <Card style={{height: 120, flexDirection: 'row'}}>
+                        <Image style={{width: 100, resizeMode: 'contain', margin: 10}} source={{uri: item['Auc_img'][0]}}/>
+                        <View style={{flexDirection: 'column'}}>
+                        <Text>{item['Auc_name']}</Text>
+                        <Text>{item['Auc_price']}</Text>
+                        </View>
+                        </Card>
+                        
+                        </View>
+                        }
+                        />
                     </View>
-                    </Card>
-                    
-                    </View>
-                    }
-                    />
-                </View>
-            
-            )
+                
+                )
+            } else {
+            <View style={{margin: 15, alignSelf: 'center'}} >
+                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 16 }}>
+                    На данный момент вы не являетесь победителем ни в одном аукционе
+                </Text>
+            </View>
+            }
         }
     }
 } 
