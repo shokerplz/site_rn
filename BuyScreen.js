@@ -38,6 +38,8 @@ class BuyScreen extends React.Component {
         }
     }
 
+    
+
     getItems() {
         fetch('https://www.corcu.ru/wp-json/corcu/buy/0', 
         {
