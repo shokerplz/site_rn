@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Text, Image, TouchableHighlight} from 'react-native';
+import { StyleSheet, View, Dimensions, Text, Image, TouchableHighlight, Platform} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import ProgressCircle from 'react-native-progress-circle'
 import { CardItem, Card } from 'native-base'
@@ -111,7 +111,7 @@ class GetData extends React.Component {
   }
 
   componentDidMount(){
-    Dimensions.get('screen').height*Dimensions.get('screen').scale <= 1920 ? this.paddingBottom = 75 : this.paddingBottom = 130;
+    Dimensions.get('screen').height*Dimensions.get('screen').scale <= 1920 || Platform.OS !== 'ios' ? this.paddingBottom = 75 : this.paddingBottom = 130;
     this.timer = setInterval(() => this.getData(), 500);
     retrieveData('token').then((response) => {
       if (response != null) {

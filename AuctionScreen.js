@@ -140,8 +140,6 @@ class Auction extends React.Component {
      btnClickA = () => this.btnClick(this.id, this.state.all_time)
 
     render() {
-      //var show_bidders;
-        //if (this.state.show_bidders == true) {show_bidders = 'flex'} else {show_bidders = 'none'}
         let show_bidders = this.state.show_bidders ? 'flex' : 'none'
         if (this.state.loading_data == false) {
             return(
@@ -178,19 +176,19 @@ class Auction extends React.Component {
             </CardItem>
               <CardItem style={{width: Dimensions.get('window').width, flexDirection: 'column', display: show_bidders}}>
                 <View style={{flexDirection: 'row'}}>
-            <Text>{this.state.highest_bidders[3]}</Text><Text style={{marginHorizontal: 25}}/><Text>{this.state.highest_bidders_time[3]}</Text>
+                <Text style={styles.bidders_text}>{this.state.highest_bidders[3]}</Text><Text style={styles.bidders_text}>{this.state.highest_bidders_time[3]}</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                <Text>{this.state.highest_bidders[2]}</Text><Text style={{marginHorizontal: 25}}/><Text>{this.state.highest_bidders_time[2]}</Text>
+                <Text style={styles.bidders_text}>{this.state.highest_bidders[2]}</Text><Text style={styles.bidders_text}>{this.state.highest_bidders_time[2]}</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                <Text>{this.state.highest_bidders[1]}</Text><Text style={{marginHorizontal: 25}}/><Text>{this.state.highest_bidders_time[1]}</Text>
+                <Text style={styles.bidders_text}>{this.state.highest_bidders[1]}</Text><Text style={styles.bidders_text}>{this.state.highest_bidders_time[1]}</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                <Text>{this.state.highest_bidders[0]}</Text><Text style={{marginHorizontal: 25}}/><Text>{this.state.highest_bidders_time[0]}</Text>
+                <Text style={styles.bidders_text}>{this.state.highest_bidders[0]}</Text><Text style={styles.bidders_text}>{this.state.highest_bidders_time[0]}</Text>
                 </View>
               </CardItem>
-            <CardItem style={{position: 'relative', top: -9, height: Dimensions.get('window').height/2}}>
+            <CardItem style={{position: 'relative', top: 0, height: Dimensions.get('window').height/2+30}}>
               <ScrollView>
                 <HTML html={this.state.AucHtml['content']['rendered']} imagesMaxWidth={200} ignoredTags={this.state.ignoredTags} tagsStyles={styles}/>
             </ScrollView>
@@ -216,6 +214,7 @@ const styles = StyleSheet.create({
         overflow: 'visible',
         display: 'none', //AT LEAST FOR NOW
     },
+    bidders_text : { width: 130, textAlign: 'center'},
     body: { backgroundColor: 'white'},
     show_bidders: {},
     container: {

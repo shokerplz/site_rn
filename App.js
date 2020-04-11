@@ -22,6 +22,7 @@ class App extends React.Component {
       loading_data: true,
       DEV: false
     }
+    global.headerHeight = 50;
   }
   async componentDidMount() {
     /*if (process.env.NODE_ENV === 'development') {
@@ -77,15 +78,15 @@ class App extends React.Component {
       }
       return (
         <View style={{flex: 1}} >
-          <SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight}}>
-          <Header style={{height: 50, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
+          <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 0}}>
+          <Header style={{height: global.headerHeight, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
             {dev_modules}
             <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
             <Text 
             style={
               {
                 textAlignVertical: 'center', 
-                paddingTop: 8, 
+                paddingTop: Platform.OS === 'ios' ? 8 : 0, 
                 fontFamily: 'Montserrat-Bold', 
                 fontSize: 25
                 }
