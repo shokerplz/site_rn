@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import { retrieveData } from './functions';
 import { Card, CardItem, Body } from 'native-base';
+import LottieView from "lottie-react-native";
 
 class AucsWon extends React.Component {
     user_won = [];
@@ -35,7 +36,15 @@ class AucsWon extends React.Component {
         
         if (this.state.loading) {
             this.getWon();
-            return(<View><Text>LOADING</Text></View>)
+            return(
+                <View style={[styles.container, styles.horizontal]}>
+                <LottieView 
+                  source={require('./assets/animations/corcu_loading.json')}
+                  loop
+                  autoPlay
+                />
+                </View>
+                )
         } else {
             if (this.user_won.length > 0){
                 return(

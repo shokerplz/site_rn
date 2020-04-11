@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import { Button } from 'native-base';
+import LottieView from "lottie-react-native";
 
 const STRIPE_ERROR = 'Произошла ошибка платежной системы. Повторите попытку позднее или обратитесь за поддержкой corcu.ru/tech-support';
 const SERVER_ERROR = 'Внутренняя ошибка. Повторите попытку позднее или обратитесь за поддержкой corcu.ru/tech-support';
@@ -53,7 +54,15 @@ class BuyScreen extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return(<View><Text>LOADING</Text></View>)
+            return(
+              <View style={[styles.container, styles.horizontal]}>
+              <LottieView 
+                source={require('./assets/animations/corcu_loading.json')}
+                loop
+                autoPlay
+              />
+              </View>
+            )
         } else {
             return(
                 <View>
