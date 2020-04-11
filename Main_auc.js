@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Text, Image, TouchableHighlight, AsyncStorage} from 'react-native';
+import { StyleSheet, View, Dimensions, Text, Image, TouchableHighlight} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import ProgressCircle from 'react-native-progress-circle'
 import { CardItem, Card } from 'native-base'
 import { setCustomText } from 'react-native-global-props';
@@ -110,6 +111,7 @@ class GetData extends React.Component {
   }
 
   componentDidMount(){
+    Dimensions.get('screen').height*Dimensions.get('screen').scale <= 1920 ? this.paddingBottom = 75 : this.paddingBottom = 130;
     this.timer = setInterval(() => this.getData(), 500);
     retrieveData('token').then((response) => {
       if (response != null) {
@@ -170,7 +172,7 @@ class GetData extends React.Component {
     */
 
    <View>
-     <View style={{height: Dimensions.get('window').height - 75}}>
+     <View style={{height: Dimensions.get('window').height - this.paddingBottom}}>
      <FlatList
     data={this.state.data}
     numColumns={2}
@@ -195,7 +197,7 @@ class GetData extends React.Component {
     <FooterButtons 
     style={{position: 'absolute', bottom: 0}}
     navigate={this.props.navigation} 
-    key={retrieveData('token').then((response) => {return(response)})}  />
+    key={/*8retrieveData('token').then((response) => {return(response)})*/505}  />
    </View>
   ) 
   

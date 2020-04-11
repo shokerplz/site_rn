@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert, AsyncStorage, Dimensions, View } from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
 
@@ -10,6 +11,7 @@ class FooterButtons extends React.Component {
     this.goToLogin = () => this.props.navigate.navigate('Login')
     this.goToAccount = () => this.props.navigate.navigate('My Account')
     this.goToAucsWon = () => this.props.navigate.navigate('Aucs Won');
+    this.goToShop = () => this.props.navigate.navigate('Shop');
     this.state = {
       token: '',
     }
@@ -40,7 +42,7 @@ class FooterButtons extends React.Component {
       <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToAccount} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='user-o' type='FontAwesome' />
       </AwesomeButton>
-      <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={() => alert('Not done yet')} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
+      <AwesomeButton borderWidth={2} borderColor={'#fff'} onPress={this.goToShop} height={50} width={Dimensions.get('window').width/5} backgroundColor={'#fafafa'}>
         <Icon name='shoppingcart' type='AntDesign' />
       </AwesomeButton>
         </View>

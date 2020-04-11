@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, AsyncStorage, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Container, Content, Form, Item, Input, Label, Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 import { retrieveData } from './functions';
 import { Card, CardItem, Body } from 'native-base';
 import LottieView from "lottie-react-native";
@@ -58,11 +58,11 @@ class AucsWon extends React.Component {
                         <Card style={{height: 120, flexDirection: 'row'}}>
                         <Image style={{width: 100, resizeMode: 'contain', margin: 10}} source={{uri: item['Auc_img'][0]}}/>
                         <View style={{flexDirection: 'column'}}>
-                        <Text>{item['Auc_name']}</Text>
-                        <Text>{item['Auc_price']}</Text>
+                            <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, margin: 10}}>Вы выиграли:</Text>
+                        <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, marginHorizontal: 10}}>{item['Auc_name']}</Text>
+                        <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16, margin: 10}}>При стоимости: {item['Auc_price']} ₽</Text>
                         </View>
                         </Card>
-                        
                         </View>
                         }
                         />
@@ -80,3 +80,17 @@ class AucsWon extends React.Component {
     }
 } 
 export default AucsWon;
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center'
+    },
+    horizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding: 10,
+      position: 'relative',
+      top: '-15%'
+    }
+  });

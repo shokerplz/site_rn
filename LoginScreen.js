@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Linking } from 'react-native';
 import { Container, Content, Form, Item, Input, Icon, View } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 class LoginScreen extends React.Component{
     constructor(props) {
         super(props);
