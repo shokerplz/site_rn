@@ -161,7 +161,6 @@ class BuyScreen extends React.PureComponent {
       } else {
         this.setState({valid: true, form: null});
       }
-      console.log(form);
     }
 
     render() {
