@@ -154,12 +154,13 @@ class MyAccountChangePassword extends React.Component {
         if (this.state.new_password == this.state.new_confirmation) {
             let password_check = await MyAccountButton('password-check', data['username'], null, null, this.state.current_password);
             if (password_check == true) {
-                alert('Ready to change passwd!')
+                MyAccountButton('password-change', data['username'], null, null, this.state.new_password);
+                Alert.alert('Пароль изменен', 'Пароль успешно изменен')
             } else {
-                alert(password_check)
+                Alert.alert('Ошибка', 'Введенный пароль неверен');
             }
         } else {
-            alert('Новый пароль и подтверждение не совпадают')
+            Alert.alert('Ошибка' ,'Новый пароль и подтверждение не совпадают');
         } }
 
     render() {
