@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, Linking } from 'react-native';
+import { Text, Linking, Alert } from 'react-native';
 import { Container, Content, Form, Item, Input, Icon, View } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
 import AsyncStorage from '@react-native-community/async-storage';
+import InAppBrowser from 'react-native-inappbrowser-reborn'
+
 class LoginScreen extends React.Component{
     constructor(props) {
         super(props);
@@ -52,9 +54,49 @@ class LoginScreen extends React.Component{
             
             this.props.navigation.navigate('Main');
         } else {
-            alert(responseJson['code']);
+            if (responseJson['code'].includes('incorrect')) {
+              Alert.alert('Ошибка', 'Введенный пароль неверен');
+            } else if (responseJson['code'].includes('username') && responseJson['code'].includes('invalid')) {
+              Alert.alert('Ошибка', 'Такого пользователя не существует');
+            } else if(responseJson['code'].includes('empty') && responseJson['code'].includes('password')) {
+              Alert.alert('Ошибка', 'Вы не ввели пароль');
+            } else if (responseJson['code'].includes('empty') && responseJson['code'].includes('username')) {
+              Alert.alert('Ошибка', 'Вы не ввели имя пользователя');
+            }
+            else {
+              Alert.alert(responseJson['code']);
+            }
         }
         return 0;
+    }
+    async registerAccount() {
+      try {
+        const url = 'https://corcu.ru/register';
+        if (await InAppBrowser.isAvailable()) {
+          const result = await InAppBrowser.open(url, {
+            // iOS Properties
+            dismissButtonStyle: 'done',
+            preferredBarTintColor: '#c1a67f',
+            preferredControlTintColor: 'white',
+            readerMode: false,
+            animated: true,
+            modalPresentationStyle: 'overFullScreen',
+            modalTransitionStyle: 'partialCurl',
+            modalEnabled: true,
+            enableBarCollapsing: false,
+            // Android Properties
+            showTitle: true,
+            toolbarColor: '#c1a67f',
+            secondaryToolbarColor: 'black',
+            enableUrlBarHiding: true,
+            enableDefaultShare: false,
+            forceCloseOnRedirection: false,
+          })
+          //console.log(JSON.stringify(result));
+        }
+      } catch(error) {
+        //console.log(error);
+      }
     }
     render() {
         return(
@@ -72,7 +114,7 @@ class LoginScreen extends React.Component{
                     <Icon name='user-o' type='FontAwesome' />
                     <Text>Войти</Text>
                 </AwesomeButton>
-                <AwesomeButton style={{alignSelf: 'center'}} borderWidth={2} borderColor={'#f0f0f0'} onPress={() => {Linking.openURL("https://corcu.ru/register")}} raiseLevel={2} height={50} width={190} backgroundColor={'#fafafa'}>
+                <AwesomeButton style={{alignSelf: 'center'}} borderWidth={2} borderColor={'#f0f0f0'} onPress={() => {this.registerAccount();}} raiseLevel={2} height={50} width={190} backgroundColor={'#fafafa'}>
                     <Icon name='user-o' type='FontAwesome' />
                     <Text>Зарегистрироваться</Text>
                 </AwesomeButton>

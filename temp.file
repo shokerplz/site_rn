@@ -1,0 +1,18 @@
+
+
+                        <Header style={{height: global.headerHeight, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
+            {dev_modules}
+                                <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
+            <Text 
+            style={
+              {
+                textAlignVertical: 'center', 
+                paddingTop: Platform.OS === 'ios' ? 8 : 0, 
+                fontFamily: 'Montserrat-Bold', 
+                fontSize: 25
+                }
+              }>
+                Corcu
+              </Text>
+              {coins}
+          </Header>

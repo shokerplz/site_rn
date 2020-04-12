@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { Container, Content, Form, Item, Input, Label, Icon } from 'native-base';
+import { Container, Content, Form, Item, Input, Icon } from 'native-base';
 import AwesomeButton from "react-native-really-awesome-button";
-import { retrieveData, postRequest, getRequest, storeData } from './functions';
+import { postRequest, storeData } from './functions';
 import LottieView from "lottie-react-native";
 import CookieManager from '@react-native-community/cookies';
-import { ThemeColors } from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const axios = require('axios');
 var data = null;
@@ -69,15 +68,17 @@ async function MyAccountButton(
             }
             break;
         case 'password-change':
-            postRequest('/simple-jwt-authentication/v1/token/validate').then(
-                (response) => {
-                    if (response.data.status == 200) {
-                        postRequest('/wp/v2/users/'+data['id'], formBody).then(console.log)
-                        CookieManager.clearAll();
-                        Alert.alert('Пароль изменен', '')
-                    }
+            responseValidate = await postRequest('/simple-jwt-authentication/v1/token/validate')
+            if (responseValidate.data.status == 200) {
+                response = await postRequest('/wp/v2/users/'+data['id'], formBody);
+                if (response['username'] != undefined) {
+                    console.log(response);
+                    return(true);
+                } else {
+                    return(false);
                 }
-            )
+            } else { return(false); }
+
             break;
         case 'delete-user':
             alert('Функция удаления аккаунта доступна только с оффициального сайта.')
@@ -154,8 +155,18 @@ class MyAccountChangePassword extends React.Component {
         if (this.state.new_password == this.state.new_confirmation) {
             let password_check = await MyAccountButton('password-check', data['username'], null, null, this.state.current_password);
             if (password_check == true) {
-                MyAccountButton('password-change', data['username'], null, null, this.state.new_password);
-                Alert.alert('Пароль изменен', 'Пароль успешно изменен')
+                if (this.state.new_confirmation.length > 0 && this.state.new_confirmation.length > 0) {
+                    if (await MyAccountButton('password-change', data['username'], null, null, this.state.new_password)) {
+                        CookieManager.clearAll();
+                        AsyncStorage.clear();
+                        this.props.nav.navigate('Main');
+                        Alert.alert('Пароль изменен', 'Пароль успешно изменен');
+                    } else {
+                        Alert.alert('Ошибка', 'Возникла ошибка повторите попытку позднее')
+                    }
+                } else {
+                    Alert.alert('Ошибка', 'Вы не ввели новый пароль или подтверждение')
+                }
             } else {
                 Alert.alert('Ошибка', 'Введенный пароль неверен');
             }
@@ -321,7 +332,9 @@ class MyAccount extends React.Component {
           email={data['email']} />;
           break;
         case '1':
-          return <MyAccountChangePassword/>;
+          return <MyAccountChangePassword
+          nav={this.props.navigation}
+          />;
           break;
         case '2':
             return <MyAccountDelivery

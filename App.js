@@ -4,13 +4,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import GetData from './Main_auc';
 import LoginScreen from './LoginScreen';
 import Auction from './AuctionScreen';
+import CookieManager from '@react-native-community/cookies';
 import BuyScreen from './BuyScreen';
 import MyAccount from './MyAccountScreen'
 import AucsWon from './AuctionWonScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-navigation';
-import { Header, Button, Icon } from 'native-base';
+import { Header, Button, Icon, Left } from 'native-base';
 const Stack = createStackNavigator();
 class App extends React.Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class App extends React.Component {
   render() {
     var dev_modules = [];
     if (this.state.DEV) {
-    dev_modules = [<Button onPress={() => AsyncStorage.removeItem('token')}></Button>];
+    dev_modules = [<Button onPress={() => {AsyncStorage.removeItem('token'); CookieManager.clearAll();}}></Button>];
     }
     if (this.state.fontLoaded && !this.state.loading_data) {
       if (this.token !== null) {
@@ -79,24 +80,28 @@ class App extends React.Component {
       return (
         <View style={{flex: 1}} >
           <SafeAreaView style={{flex: 1, paddingTop: 0}}>
-          <Header style={{height: global.headerHeight, paddingTop: 0, backgroundColor: 'white', paddingRight: 50}}>
-            {dev_modules}
-            <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
-            <Text 
-            style={
-              {
-                textAlignVertical: 'center', 
-                paddingTop: Platform.OS === 'ios' ? 8 : 0, 
-                fontFamily: 'Montserrat-Bold', 
-                fontSize: 25
-                }
-              }>
-                Corcu
-              </Text>
-              {coins}
-          </Header>
           <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerRight: props => <View>{coins}</View>, headerTitleAlign: 'center', 
+        // HEADER MIDDLE STARTS
+        headerStyle: {
+          height: global.headerHeight, 
+          backgroundColor: 'white'
+        }, headerTitle: props => 
+            <View style={{flexDirection: 'row', paddingRight: 50  }}>
+              <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
+              <Text 
+              style={
+                {
+                  textAlignVertical: 'center', 
+                  paddingTop: Platform.OS === 'ios' ? 8 : 0, 
+                  fontFamily: 'Montserrat-Bold', 
+                  fontSize: 25
+                }
+                    }>
+                  Corcu
+              </Text>
+            </View>,
+            }}>
         <Stack.Screen name="Main" component={GetData}></Stack.Screen>
         <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
         <Stack.Screen name="Auction" component={Auction}></Stack.Screen>
