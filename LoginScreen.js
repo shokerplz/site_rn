@@ -62,6 +62,8 @@ class LoginScreen extends React.Component{
               Alert.alert('Ошибка', 'Вы не ввели пароль');
             } else if (responseJson['code'].includes('empty') && responseJson['code'].includes('username')) {
               Alert.alert('Ошибка', 'Вы не ввели имя пользователя');
+            } else if (responseJson['code'].includes('awaiting') && responseJson['code'].includes('email') && responseJson['code'].includes('confirmation')) {
+              Alert.alert('Ошибка', 'Необходимо подтвердить свою учетную запись. Письмо с подтверждением направлено вам на email');
             }
             else {
               Alert.alert(responseJson['code']);
@@ -75,12 +77,12 @@ class LoginScreen extends React.Component{
         if (await InAppBrowser.isAvailable()) {
           const result = await InAppBrowser.open(url, {
             // iOS Properties
-            dismissButtonStyle: 'done',
+            dismissButtonStyle: 'Готово',
             preferredBarTintColor: '#c1a67f',
             preferredControlTintColor: 'white',
             readerMode: false,
-            animated: true,
-            modalPresentationStyle: 'overFullScreen',
+            animated: false,
+            modalPresentationStyle: 'fullScreen',
             modalTransitionStyle: 'partialCurl',
             modalEnabled: true,
             enableBarCollapsing: false,
@@ -91,11 +93,17 @@ class LoginScreen extends React.Component{
             enableUrlBarHiding: true,
             enableDefaultShare: false,
             forceCloseOnRedirection: false,
+            animations: {
+              startEnter: 'slide_in_right',
+              startExit: 'slide_out_left',
+              endEnter: 'slide_in_left',
+              endExit: 'slide_out_right'
+            },
           })
           //console.log(JSON.stringify(result));
         }
       } catch(error) {
-        //console.log(error);
+        console.log(error);
       }
     }
     render() {

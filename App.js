@@ -80,13 +80,15 @@ class App extends React.Component {
       return (
         <View style={{flex: 1}} >
           <SafeAreaView style={{flex: 1, paddingTop: 0}}>
+            {dev_modules}
           <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerRight: props => <View>{coins}</View>, headerTitleAlign: 'center', 
+        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerRight: props => <View>{coins}</View>,  headerBackTitle: 'Назад', headerTitleAlign: 'center', 
         // HEADER MIDDLE STARTS
         headerStyle: {
           height: global.headerHeight, 
           backgroundColor: 'white'
-        }, headerTitle: props => 
+        },
+        headerTitle: props => 
             <View style={{flexDirection: 'row', paddingRight: 50  }}>
               <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
               <Text 
