@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { View, Text, NetInfo, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
 
 const { width } = Dimensions.get('window');
 
@@ -11,17 +12,20 @@ function MiniOfflineSign() {
   );
 }
 
+
 class OfflineNotice extends PureComponent {
   state = {
     isConnected: true
   };
-
+  unsubscribe = null;
   componentDidMount() {
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
+    this.unsubscribe = NetInfo.addEventListener(state => {
+      this.setState({ isConnected: state.isConnected })
+    });
   }
 
   componentWillUnmount() {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
+    this.unsubscribe();
   }
 
   handleConnectivityChange = isConnected => {

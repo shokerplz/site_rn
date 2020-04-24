@@ -135,9 +135,10 @@ class App extends React.Component {
           </View>
         );
       } else {
-        console.log('HELLO>>>??');
         return(
-          <View>
+          <SafeAreaView>
+            <OfflineNotice/>
+            <View>
           <View style={{margin: 15, alignSelf: 'center', justifyContent: 'center'}}>
           <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>
           Corcu сейчас не работает 😞
@@ -145,17 +146,20 @@ class App extends React.Component {
           <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>
             Повторите попытку позднее</Text></View>
           </View>
+          </SafeAreaView>
         );
       }
     } else {
       return(
+        <>
+        <OfflineNotice/>
         <View style={[styles.container, styles.horizontal]}>
         <LottieView 
           source={require('./assets/animations/corcu_loading.json')}
           loop
           autoPlay
         />
-        </View>
+        </View></>
       );
     }
   }
