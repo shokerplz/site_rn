@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, Dimensions, StatusBar, View, Text, Image, Platform } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, Image, Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import GetData from './Main_auc';
 import LoginScreen from './LoginScreen';
 import Auction from './AuctionScreen';
 import CookieManager from '@react-native-community/cookies';
 import BuyScreen from './BuyScreen';
-import MyAccount from './MyAccountScreen'
+import MyAccount from './MyAccountScreen';
 import AucsWon from './AuctionWonScreen';
+import OfflineNotice from './OfflineNotice';
+import LottieView from 'lottie-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-navigation';
-import { Header, Button, Icon, Left } from 'native-base';
+import { Button, Icon } from 'native-base';
 const Stack = createStackNavigator();
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +23,9 @@ class App extends React.Component {
       fontLoaded: false,
       data: null,
       loading_data: true,
-      DEV: false
+      DEV: false,
+      isConnected: true,
+      hostUnreachable: false,
     }
     global.headerHeight = 50;
   }
@@ -39,6 +43,9 @@ class App extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+  handleConnectivityChange = isConnected => {
+    this.setState({ isConnected });
+  }
   async getUserData() {
     if (this.token == null) {
       this.token = await AsyncStorage.getItem('token');
@@ -49,7 +56,12 @@ class App extends React.Component {
               'Authorization': 'Bearer '+ this.token,
             }}
             )
-    .then((response) => response.json())
+    .then((response) => { response.json(); if (response.status == '522') { throw true } 
+    else { if(this.state.hostUnreachable && response.status == '200') {
+        this.setState({
+          hostUnreachable: false
+        })
+    }} })
     .then((responseJson) => {
       this.setState({data: responseJson})
       if (this.state.loading_data) {
@@ -57,7 +69,12 @@ class App extends React.Component {
       }
     })
     .catch((error) => {
-      console.error(error);
+      if (error == true) {
+        this.setState({
+          hostUnreachable: true,
+          loading_data: false
+        })
+      }
     });
   }
   render() {
@@ -66,57 +83,80 @@ class App extends React.Component {
     dev_modules = [<Button onPress={() => {AsyncStorage.removeItem('token'); CookieManager.clearAll();}}></Button>];
     }
     if (this.state.fontLoaded && !this.state.loading_data) {
-      if (this.token !== null) {
-        coins = 
-        <View style={{position: 'absolute', margin: 5, right: 5, top: 5, flexDirection: 'row'}}>
-        <Icon name='coins' type='FontAwesome5' style={{paddingRight: 5}}></Icon>
-        <Text style={{fontFamily: 'Montserrat-Bold', fontSize: 20}}>
-        {this.state.data['user_credits']}
-        </Text>
-      </View>
+      if (!this.state.hostUnreachable) {
+        if (this.token !== null) {
+          coins = 
+          <View style={{position: 'absolute', margin: 5, right: 5, top: 5, flexDirection: 'row'}}>
+          <Icon name='coins' type='FontAwesome5' style={{paddingRight: 5}}></Icon>
+          <Text style={{fontFamily: 'Montserrat-Bold', fontSize: 20}}>
+          {this.state.data['user_credits']}
+          </Text>
+        </View>
+        } else {
+          coins = null;
+        }
+        return (
+          <View style={{flex: 1}} >
+            <SafeAreaView style={{flex: 1, paddingTop: 0}}>
+            <OfflineNotice/>
+              {dev_modules}
+            <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main" screenOptions={{ headerRight: props => <View>{coins}</View>,  headerBackTitle: 'Назад', headerTitleAlign: 'center', 
+          // HEADER MIDDLE STARTS
+          headerStyle: {
+            height: global.headerHeight, 
+            backgroundColor: 'white'
+          },
+          headerTitle: props => 
+              <View style={{flexDirection: 'row', paddingRight: 50  }}>
+                <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
+                <Text 
+                style={
+                  {
+                    textAlignVertical: 'center', 
+                    paddingTop: Platform.OS === 'ios' ? 8 : 0, 
+                    fontFamily: 'Montserrat-Bold', 
+                    fontSize: 25
+                  }
+                      }>
+                    Corcu
+                </Text>
+              </View>,
+              }}>
+          <Stack.Screen name="Main" component={GetData}></Stack.Screen>
+          <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
+          <Stack.Screen name="Auction" component={Auction}></Stack.Screen>
+          <Stack.Screen name="My Account" component={MyAccount}></Stack.Screen>
+          <Stack.Screen name="Aucs Won" component={AucsWon}></Stack.Screen>
+          <Stack.Screen name="Shop" component={BuyScreen}></Stack.Screen>
+            </Stack.Navigator>
+          </NavigationContainer>
+            </SafeAreaView>
+          </View>
+        );
       } else {
-        coins = null;
+        console.log('HELLO>>>??');
+        return(
+          <View>
+          <View style={{margin: 15, alignSelf: 'center', justifyContent: 'center'}}>
+          <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>
+          Corcu сейчас не работает 😞
+          </Text>
+          <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>
+            Повторите попытку позднее</Text></View>
+          </View>
+        );
       }
-      return (
-        <View style={{flex: 1}} >
-          <SafeAreaView style={{flex: 1, paddingTop: 0}}>
-            {dev_modules}
-          <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerRight: props => <View>{coins}</View>,  headerBackTitle: 'Назад', headerTitleAlign: 'center', 
-        // HEADER MIDDLE STARTS
-        headerStyle: {
-          height: global.headerHeight, 
-          backgroundColor: 'white'
-        },
-        headerTitle: props => 
-            <View style={{flexDirection: 'row', paddingRight: 50  }}>
-              <Image source={require('./assets/icons/small_logo.png')} style={{height: 50, width: 50, resizeMode: 'contain'}} />
-              <Text 
-              style={
-                {
-                  textAlignVertical: 'center', 
-                  paddingTop: Platform.OS === 'ios' ? 8 : 0, 
-                  fontFamily: 'Montserrat-Bold', 
-                  fontSize: 25
-                }
-                    }>
-                  Corcu
-              </Text>
-            </View>,
-            }}>
-        <Stack.Screen name="Main" component={GetData}></Stack.Screen>
-        <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
-        <Stack.Screen name="Auction" component={Auction}></Stack.Screen>
-        <Stack.Screen name="My Account" component={MyAccount}></Stack.Screen>
-        <Stack.Screen name="Aucs Won" component={AucsWon}></Stack.Screen>
-        <Stack.Screen name="Shop" component={BuyScreen}></Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
-          </SafeAreaView>
+    } else {
+      return(
+        <View style={[styles.container, styles.horizontal]}>
+        <LottieView 
+          source={require('./assets/animations/corcu_loading.json')}
+          loop
+          autoPlay
+        />
         </View>
       );
-    } else {
-      return null;
     }
   }
 }
@@ -126,6 +166,17 @@ export default App;
 const styles = StyleSheet.create({
   main: {
     height: Dimensions.get('window').height - 100
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+    position: 'relative',
+    top: '-15%'
   },
   header: {
     backgroundColor: '#c1a67f',
