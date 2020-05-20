@@ -138,7 +138,10 @@ class GetData extends React.Component {
       }
     })
     .catch((error) => {
-      console.error(error);
+      this.setState(
+          { data: undefined, loading: false }
+        )
+      //console.error(error);
     });
   }
 
@@ -173,7 +176,7 @@ class GetData extends React.Component {
 
    <View>
      <View style={{height: Dimensions.get('window').height - this.paddingBottom}}>
-     <FlatList
+       {this.state.data !== undefined ?      <FlatList
     data={this.state.data}
     numColumns={2}
     extraData={this.state.data}
@@ -192,7 +195,11 @@ class GetData extends React.Component {
         goToAuction={this.goToAuction}
       />
     }
-    />
+    /> :           <View style={{margin: 15, alignSelf: 'center', justifyContent: 'center'}}>
+    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>
+    К сожалению, открытые аукционы сейчас отсутствуют 😞
+    </Text></View>}
+
      </View>
     <FooterButtons 
     style={{position: 'absolute', bottom: 0}}

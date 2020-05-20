@@ -69,6 +69,7 @@ class App extends React.Component {
       }
     })
     .catch((error) => {
+      console.log(error)
       if (error == true) {
         this.setState({
           hostUnreachable: true,
